@@ -1,6 +1,8 @@
 	PRESERVE8
 	THUMB  	
 	IMPORT Son
+	IMPORT LongueurSon
+	IMPORT StartSon
 	include Driver\DriverJeuLaser.inc
 ; ====================== zone de réservation de données,  ======================================
 ;Section RAM (read only) :
@@ -15,7 +17,7 @@ Index dcd 0
 ; ===============================================================================================
 	EXPORT CallbackSon
 	EXPORT SortieSon
-
+	EXPORT Index
 		
 ;Section ROM code (read only) :		
 	area    moncode,code,readonly
@@ -24,6 +26,11 @@ Index dcd 0
 CallbackSon proc
 	LDR r1,=Index ;index du tableau
 	LDR r2,[r1]
+	
+	LDR r3, =LongueurSon
+	LDR r3, [r3]
+	CMP r2, r3
+	BGE exit
 	
 	LDR r3,=Son ;pointeur sur le tableau
 
@@ -44,10 +51,9 @@ CallbackSon proc
 	MOV r0, r12
 	BL PWM_Set_Value_TIM3_Ch3
 	pop {LR}
-	
+
+exit
 	BX LR
 	ENDP
 	END	
 		
-StartSon proc
-	BL CallbackSon

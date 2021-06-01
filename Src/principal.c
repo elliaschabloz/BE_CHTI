@@ -4,7 +4,12 @@
 
 extern void CallbackSon(void);
 extern int SortieSon;
+extern int Index;
 
+void StartSon(void){
+	Index = 0;
+	return ;
+}
 int main(void)
 {
 
@@ -25,10 +30,15 @@ PWM_Init_ff( TIM3, 3, 720 );
 	
 GPIO_Configure(GPIOB, 0, OUTPUT, ALT_PPULL);
 //============================================================================	
-	
+int cpt = 0;	
 	
 while	(1)
 	{
+		/*cpt++;
+		if (cpt == 20000000){
+			StartSon();
+			cpt = 0;
+		}*/
 	}
 }
 
