@@ -8,6 +8,8 @@ extern short int TabSin;
 
 short int tab[64];
 short int tab_ech[64];
+short int tab_score[4];
+
 
 int DFT_ModuleAuCarre( short int * Signal64ech, char k){
 	return DFT(Signal64ech, k, &TabCos) + DFT(Signal64ech, k, &TabSin);
